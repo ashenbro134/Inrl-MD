@@ -50,8 +50,8 @@ inrl({
     if(!m.reply_message.fromMe || !m.reply_message.text) return;
     if(!m.reply_message.text.includes(lang.SETTINGS.TO_UPDATE)) return;
     match = m.client.body.toLowerCase();
-    if (!match.includes(lang.SETTINGS.LIST)) return;
-    match = match.replace(lang.SETTINGS.LIST, '').trim();
+    if (!match.includes(lang.SETTINGS.LIST.toLowerCase())) return;
+    match = match.replace(lang.SETTINGS.LIST.toLowerCase(), '').trim();
     if (match == lang.SETTINGS.SPAM_DELAY.toLowerCase()) {
         const {
             ANTI_SPAM

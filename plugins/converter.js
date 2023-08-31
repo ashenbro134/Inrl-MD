@@ -29,8 +29,8 @@ inrl({
     sucReact: "⚒️",
     type: "converter"
 }, async (message) => {
-    if (!message.quoted.stickerMessage) return  await message.reply(lan.BASE.NEED.format("non animated sticker message"));
-    if(message.reply_message.isAnimatedSticker) return  await message.reply(lan.BASE.NEED.format("please reply to a non animated sticker"));
+    if (!message.quoted.stickerMessage) return  await message.reply(lang.BASE.NEED.format("non animated sticker message"));
+    if(message.reply_message.isAnimatedSticker) return  await message.reply(lang.BASE.NEED.format("please reply to a non animated sticker"));
     return await sendPhoto(message);
 });
 inrl({
@@ -39,9 +39,9 @@ inrl({
     sucReact: "⚒️",
     type: "converter"
 }, async (message, match) => {
-    if (!message.quoted.stickerMessage && !message.reply_message.text && !match) return message.reply(lan.BASE.NEED.format("animated sticker message"));
+    if (!message.quoted.stickerMessage && !message.reply_message.text && !match) return message.reply(lang.BASE.NEED.format("animated sticker message"));
     if(!message.quoted.stickerMessage) return;
-    if(!message.reply_message.isAnimatedSticker) return  await message.reply(lan.BASE.NEED.format("please reply to an animated sticker"));
+    if(!message.reply_message.isAnimatedSticker) return  await message.reply(lang.BASE.NEED.format("please reply to an animated sticker"));
     let media = await toVideo(await message.quoted.download())
     return await message.client.sendMessage(message.from, {
         video: media,
@@ -56,7 +56,7 @@ inrl({
     sucReact: "⚒️",
     type: "converter"
 }, async (message) => {
-    if (!message.quoted.audioMessage) return message.reply(lan.BASE.NEED.format("video/audio message"));
+    if (!message.quoted.audioMessage) return message.reply(lang.BASE.NEED.format("video/audio message"));
     let media = await toPTT(await message.quoted.download())
     return await message.client.sendMessage(message.from, {
         audio: media,
@@ -73,7 +73,7 @@ inrl({
     type: "converter"
 }, async (message) => {
     if (!message.quoted) return;
-    if (!message.quoted.stickerMessage || message.quoted.videoMessage) return message.reply(lan.BASE.NEED.format("animated sticker/video message"));
+    if (!message.quoted.stickerMessage || message.quoted.videoMessage) return message.reply(lang.BASE.NEED.format("animated sticker/video message"));
     return await sendGif(message)
 });
 inrl({
@@ -82,7 +82,7 @@ inrl({
     sucReact: "⚒️",
     type: "audio-edit"
 }, async (message) => {
-    if (!message.quoted.audio) return message.reply(lan.BASE.NEED.format("audio message"));
+    if (!message.quoted.audio) return message.reply(lang.BASE.NEED.format("audio message"));
     return await sendBassAudio(message)
 });
 inrl({
@@ -91,7 +91,7 @@ inrl({
     sucReact: "⚒️",
     type: "audio-edit"
 }, async (message) => {
-    if (!message.quoted.audioMessage) return message.reply(lan.BASE.NEED.format("audio message"));
+    if (!message.quoted.audioMessage) return message.reply(lang.BASE.NEED.format("audio message"));
     return await sendSlowAudio(message)
 });
 inrl({
@@ -100,7 +100,7 @@ inrl({
     sucReact: "⚒️",
     type: "audio-edit"
 }, async (message) => {
-    if (!message.quoted.audioMessage) return message.reply(lan.BASE.NEED.format("audio message"));
+    if (!message.quoted.audioMessage) return message.reply(lang.BASE.NEED.format("audio message"));
     return await sendBlownAudio(message)
 });
 inrl({
@@ -109,7 +109,7 @@ inrl({
     sucReact: "⚒️",
     type: "audio-edit"
 }, async (message) => {
-    if (!message.quoted.audioMessage) return message.reply(lan.BASE.NEED.format("audio message"));
+    if (!message.quoted.audioMessage) return message.reply(lang.BASE.NEED.format("audio message"));
     return await sendDeepAudio(message);
 });
 inrl({
@@ -118,7 +118,7 @@ inrl({
     sucReact: "⚒️",
     type: "audio-edit"
 }, async (message) => {
-    if (!message.quoted.audioMessage) return message.reply(lan.BASE.NEED.format("audio message"));
+    if (!message.quoted.audioMessage) return message.reply(lang.BASE.NEED.format("audio message"));
     return await sendErrapeAudio(message)
 });
 inrl({
@@ -127,7 +127,7 @@ inrl({
     sucReact: "⚒️",
     type: "audio-edit"
 }, async (message) => {
-    if (!message.quoted.audioMessage) return message.reply(lan.BASE.NEED.format("audio message"));
+    if (!message.quoted.audioMessage) return message.reply(lang.BASE.NEED.format("audio message"));
     return await sendFastAudio(message)
 });
 inrl({
@@ -136,7 +136,7 @@ inrl({
     sucReact: "⚒️",
     type: "audio-edit"
 }, async (message) => {
-    if (!message.quoted.audioMessage) return message.reply(lan.BASE.NEED.format("audio message"));
+    if (!message.quoted.audioMessage) return message.reply(lang.BASE.NEED.format("audio message"));
     return await sendFatAudio(message);
 });
 inrl({
@@ -145,7 +145,7 @@ inrl({
     sucReact: "⚒️",
     type: "audio-edit"
 }, async (message) => {
-    if (!message.quoted.audioMessage) return message.reply(lan.BASE.NEED.format("audio message"));
+    if (!message.quoted.audioMessage) return message.reply(lang.BASE.NEED.format("audio message"));
     return await sendNightcoreAudio(message);
 });
 inrl({
@@ -154,7 +154,7 @@ inrl({
     sucReact: "⚒️",
     type: "audio-edit"
 }, async (message) => {
-    if (!message.quoted.audioMessage) return message.reply(lan.BASE.NEED.format("audio message"));
+    if (!message.quoted.audioMessage) return message.reply(lang.BASE.NEED.format("audio message"));
     return await sendReverseAudio(message);
 });
 inrl({
@@ -163,7 +163,7 @@ inrl({
     sucReact: "⚒️",
     type: "audio-edit"
 }, async (message) => {
-    if (!message.quoted.audioMessage) return message.reply(lan.BASE.NEED.format("audio message"));
+    if (!message.quoted.audioMessage) return message.reply(lang.BASE.NEED.format("audio message"));
     return await sendSquirrelAudio(message);
 });
 
@@ -173,12 +173,11 @@ inrl({
     sucReact: "💥",
     type: "converter"
 }, (async (message) => {
-    if (!message.quoted.audioMessage && !message.quoted.videoMessage) return message.reply(lan.BASE.NEED.format("video message"));
+    if (!message.quoted.audioMessage && !message.quoted.videoMessage) return message.reply(lang.BASE.NEED.format("video message"));
     let media = await toAudio(await message.quoted.download())
     return await message.client.sendMessage(message.from, {
         audio: media,
-        mimetype: 'audio/mp3',
-        ptt: false
+        mimetype: 'audio/mpeg'
     }, {
         quoted: message
     })

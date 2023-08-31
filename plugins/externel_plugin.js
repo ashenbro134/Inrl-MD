@@ -56,7 +56,7 @@ inrl({
             fs.unlinkSync(__dirname + "/" + plugin_name + ".js");
             return await message.reply(e);
         }
-        await message.reply(lang.EXTERNAL_PLUGIN.format(plugin_name.split('test')[0]))
+        await message.reply(lang.EXTERNAL_PLUGIN.INSTALLED.format(plugin_name.split('test')[0]))
         await add_plugin(plugin_name.split('test')[0], NewUrl, message.client.user.number)
         fs.unlinkSync(__dirname + "/" + plugin_name + ".js");
     }

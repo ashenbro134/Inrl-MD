@@ -26,7 +26,7 @@
 ---
 #### Deploy To Railway
 
-<a href="https://railway.app/new/template/K7RXq3?referralCode=koOK_D"><img title="INRL-MD Deploy Railway" src="https://img.shields.io/badge/DEPLOY RAILWAY-h?color=black&style=for-the-badge&logo=Railway"></a>
+<a href="https://railway.app/template/E4UWoL?referralCode=koOK_D"><img title="INRL-MD Deploy Railway" src="https://img.shields.io/badge/DEPLOY RAILWAY-h?color=black&style=for-the-badge&logo=Railway"></a>
 
 
 ---

@@ -27,11 +27,11 @@ inrl({
         let [cmd, tog] = match.split(' '), isIn = false;
         if (!cmd || (tog != 'off' && tog != 'on')) return await message.send(lang.TOGGLE.METHODE.format(".toggle"))
         commands.map((c) => {
-                if (c.pattern.replace(/[^a-zA-Z0-9,+-]/g, "") == cmd) {
+                if (c.pattern && c.pattern.replace(/[^a-zA-Z0-9,+-]/g, "") == cmd) {
                         isIn = true
                 }
         });
-        await sleep(342)
+        await sleep(250)
         if (!isIn) return await message.reply(lang.TOGGLE.ERROR);
         if (cmd == 'toggle') return await message.send(lang.TOGGLE.ERROR_KILL)
         await TogCmd(cmd, tog, message.client.user.number)

@@ -117,7 +117,7 @@ inrl({
                         if (!match) return message.reply(lang.GROUP.ANTILINK.NEED_ACTION.format("antilink on/off;null"));
                         if (!match.includes('on') && match.includes('off')) return message.reply(lang.GROUP.ANTILINK.INVALID.format("antilink on|kick"));
                         if (!match.split(/[;|,]/)[1]) return message.send("Give me an action\nExample:- antilink on, warn");
-                        if (!actions.includes(match.split(/[;|,]/)[1].trim()) return await message.send("action must be kick, warn or null");
+                        if (!actions.includes(match.split(/[;|,]/)[1].trim())) return await message.send("action must be kick, warn or null");
                                 let {
                                         values
                                 } = await getAntiLink(message);
@@ -146,7 +146,7 @@ inrl({
                                 if (!admin && !message.client.isCreator) return await message.reply(lang.BASE.NOT_AUTHR)
                                 if (!match) return message.reply(lang.GROUP.ANTI_WORD.NEED_WORD.format('```antiword idk;kick```'))
                                 if (!match.split(/[;|,]/)[1]) return message.send("Give me an action\nExample:- antiword oo, warn");
-                                if (!actions.includes(match.split(/[;|,]/)[1].trim()) return await message.send("action must be kick, warn or null");
+                                if (!actions.includes(match.split(/[;|,]/)[1].trim())) return await message.send("action must be kick, warn or null");
                                         let data = await GetWords(message);
                                         if (data = "no data") {
                                                 await setAntiWord(message, match.split(/[;|,]/)[0].trim(), match.split(/[;|,]/)[1].trim());

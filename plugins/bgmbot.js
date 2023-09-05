@@ -1,7 +1,10 @@
 const bgm = require('../media/bgm.json');
-module.exports = async(conn, m, vars) => {
+const {inrl} = require('../lib');
+inrl({
+	on: "text"
+}, async (m, match, {BGMBOT,PREFIX}) => {
+ if(m?.fromMe) return;
 if((m.key.id.startsWith("BAE5") && m.key.id.length == 16)) return;
-const {BGMBOT,PREFIX} = vars;
 let prefix = PREFIX =='false' ? '': PREFIX;
 let isFalseOrNot = prefix==''?'i£':prefix;
 if(m.client.body.startsWith(isFalseOrNot)) return;
@@ -29,5 +32,5 @@ if(m.client.body.startsWith(isFalseOrNot)) return;
     })
   }
  if(mp3 === undefined) return;
- return conn.sendMessage(m.from,{ audio: { url: mp3.trim() }, mimetype: "audio/mp4",ptt: true}, { quoted: m } );
-}
+ return m.sock.sendMessage(m.from,{ audio: { url: mp3.trim() }, mimetype: "audio/mp4",ptt: true}, { quoted: m } );
+})

@@ -1,8 +1,10 @@
 const axios = require('axios');
-
-module.exports = async(conn, m, vars) => {
+const {inrl} = require('../lib');
+inrl({
+	on: "text"
+}, async (m, match, {PREFIX,AUTO_CHAT_PM,AUTO_CHAT_GRP}) => {
   if((m.key.id.startsWith("BAE5") && m.key.id.length == 16)) return;
-  const {PREFIX,AUTO_CHAT_PM,AUTO_CHAT_GRP} = vars;
+  if(m?.fromMe) return;
   const prefix = PREFIX=='false'?'':PREFIX;
   let isFalseOrNot = prefix==''?'i£':prefix;
   if(m.client.body.startsWith(isFalseOrNot)) return;
@@ -13,4 +15,4 @@ module.exports = async(conn, m, vars) => {
   let {data} = await axios(`http://api.brainshop.ai/get?bid=172372&key=nbjE0YAlyw3cpoMl&uid=[${m.sender}]&msg=[${m.client.body}]`)
   return await m.reply(data.cnt)
   }
-}
+});

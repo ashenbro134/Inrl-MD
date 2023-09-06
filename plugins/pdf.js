@@ -13,7 +13,7 @@ inrl({
         pattern: 'pdf ?(.*)',
         desc: "Images to PDF",
         type: 'converters',
-        help: `_1. Input images using .pdf_\n_2. Get output pdf using .pdf get_\n_3. Added images by mistake? then delete all inputted images using .pdf delete_\n_4. All files will be auto deleted after the output is produced_`
+        usage: `_1. Input images using .pdf_\n_2. Get output pdf using .pdf get_\n_3. Added images by mistake? then delete all inputted images using .pdf delete_\n_4. All files will be auto deleted after the output is produced_`
 }, async (message, match) => {
         if (!fs.existsSync(pdfPath)) {
                 fs.mkdirSync(pdfPath)

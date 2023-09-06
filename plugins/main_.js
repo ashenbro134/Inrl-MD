@@ -44,15 +44,6 @@ inrl({
     return await webSs(message, message.client);
 });
 inrl({
-    pattern: 'pdf',
-    desc: lang.GENERAL.PDF,
-    react: "⚒️",
-    type: "converter"
-}, (async (message, match, data) => {
-    if (!match) return message.reply(lang.BASE.ERROR.format('pdf https://github.com/inrl-official'));
-    return await pdfGen(message, message.client);
-}))
-inrl({
     pattern: 'take',
     desc: lang.GENERAL.TAKE_DESC,
     react: "⚒️",
@@ -65,8 +56,8 @@ inrl({
     try {
         if (!message.quoted.sticker && !message.quoted.audio) return message.reply('reply to a sticker/audio');
         if (message.quoted.stickerMessage) {
-            let pack, auth;
-            if (match.includes(/[|,;]/)) {
+            let pack;
+            if (match.split(/[|,;]/)[1]) {
                 let i = match.split(/[|,;]/);
                 pack = i[0] ? i[0] : STICKER_DATA.split(/[|,;]/)[0];
             } else {
@@ -75,7 +66,6 @@ inrl({
             let media = await message.quoted.download();
             return await message.client.sendFile(message.from, media, "", message, {
                 asSticker: true,
-                author: auth,
                 packname: pack,
                 categories: ["😄"],
             });
@@ -120,8 +110,8 @@ inrl({
     for (let res of md.results) {
         await message.client.sendFile(message.from, await getBuffer(res.url), "",message, {
           asSticker: true,
-          author: STICKER_DATA.split(';')[0],
-          packname: STICKER_DATA.split(';')[1],
+          author: STICKER_DATA.split(/[|,;]/)[0],
+          packname: STICKER_DATA.split(/[|,;]/)[1],
           categories: ["😄", "😊"],
         });
     }

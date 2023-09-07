@@ -116,12 +116,12 @@ inrl({
                         if (!admin && !message.client.isCreator) return await message.reply(lang.BASE.NOT_AUTHR)
                         if (!match) return message.reply(lang.GROUP.ANTILINK.NEED_ACTION.format("antilink on/off;null"));
                         if (!match.includes('on') && match.includes('off')) return message.reply(lang.GROUP.ANTILINK.INVALID.format("antilink on|kick"));
-                        if (!match.split(/[;|,]/)[1]) return message.send("Give me an action\nExample:- antilink on, warn");
-                        if (!actions.includes(match.split(/[;|,]/)[1].trim())) return await message.send("action must be kick, warn or null");
                                 let {
                                         values
                                 } = await getAntiLink(message);
                                 if (match.includes("on")) {
+                                        if (!match.split(/[;|,]/)[1]) return message.send("Give me an action\nExample:- antilink on, warn");
+                                        if (!actions.includes(match.split(/[;|,]/)[1].trim())) return await message.send("action must be kick, warn or null");
                                         if (values == "true") return message.reply(lang.GROUP.ANTILINK.ALREADY_ACTIVATED);
                                         await setAntiLink(message, match.split(/[;|,]/)[1].trim())
                                         return await message.reply(lang.GROUP.ANTILINK.SUCCESS_ON)

@@ -115,7 +115,7 @@ inrl({
                         if (ADMIN_SUDO_ACCESS != "true" && !message.client.isCreator) return await message.reply(lang.BASE.NOT_AUTHR)
                         if (!admin && !message.client.isCreator) return await message.reply(lang.BASE.NOT_AUTHR)
                         if (!match) return message.reply(lang.GROUP.ANTILINK.NEED_ACTION.format("antilink on/off;null"));
-                        if (!match.includes('on') && match.includes('off')) return message.reply(lang.GROUP.ANTILINK.INVALID.format("antilink on|kick"));
+                        if (!match.includes('on') && !match.includes('off')) return message.reply(lang.GROUP.ANTILINK.INVALID.format("antilink on|kick"));
                                 let {
                                         values
                                 } = await getAntiLink(message);

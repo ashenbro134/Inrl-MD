@@ -1,4 +1,3 @@
-//created by @inrl 
 const {
     inrl,
     GenListMessage,
@@ -245,42 +244,42 @@ inrl({
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("ANTI_SPAM", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('allways online')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("ALLWAYS_ONLINE", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('admin sudo access')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("ADMIN_SUDO_ACCESS", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('react all')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("REACT", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('react cmd')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("REACT_CMD", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
-    } else if (match.includes('react emoji')) {
+        return await m.reply(lang.BASE.SUCCESS);
+    } else if (match.includes('react emojis')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("REACT_EMOJI", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('read chat')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("READ_CHAT", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('bgm bot')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("BGMBOT", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('mode')) {
         let updt = match.split(" ").pop();
         updt = updt == "public" ? 'private' : 'public';
@@ -290,65 +289,65 @@ inrl({
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("PM_BLOCK", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('avoid callers')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("CALL_BLOCK", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('view all status')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("STATUS_VIEW", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('save status')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("SAVE_STATUS", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('chat bot in pm')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("AUTO_CHAT_PM", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('chat bot in group')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("AUTO_CHAT_GRP", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('rejectcall')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("REJECT_CALL", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('warn group spammers')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("WARN_GROUP_SPAMMERS", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('warn inappropriate message sender')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("BADWORD_BLOCK", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('avoid inappropriate message sender')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("REJECT_CALL", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('read commands')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("READ_COMMANDS", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('avoid spammers')) {
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("SPAM_BLOCK", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('available') || match.includes('composing') || match.includes('recording') || match.includes('paused')) {
         let updt = match.split(" ")[0]
         await UpdateVariable("BOT_PRESENCE", updt, m.client.user.number);
-        return await m.reply("_*requested to the db*_");
+        return await m.reply(lang.BASE.SUCCESS);
     }
 });

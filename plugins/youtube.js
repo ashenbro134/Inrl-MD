@@ -9,7 +9,8 @@ const {
     GenListMessage,
     getLang
 } = require('../lib');
-let lang = getLang()
+let lang = getLang();
+
 
 const {
     BASE_URL
@@ -37,7 +38,7 @@ inrl({
             });
         }
     } catch (e) {
-        return m.send('_Time Out_ ' + e);
+        return m.send('_Time Out_');
     }
 });
 inrl({
@@ -56,12 +57,13 @@ inrl({
             return await m.send(GenListMessage(msg, result));
         } else {
             const ress = await downloadMp4(url[0]);
-            return await m.sock.sendMessage(m.from, {
+            await m.sock.sendMessage(m.from, {
                 video: ress,
                 mimetype: 'video/mp4'
             });
         }
     } catch (e) {
+        await m.send(e)
         return m.send('_Time Out_');
     }
 });

@@ -98,9 +98,9 @@ inrl({
             const result = await searchYT(match, true);
             const {seconds,title,thumbnail} = await getYTInfo(result[0]);
             let quality = seconds<1800?"360p":"144p";
-            const AudioMeta = await AudioMetaData(await getBuffer(thumbnail), await toAudio(ress), title, data);
             const ress = await downloadMp3(result[0],quality);
-            return await m.sock.sendMessage(m.from, {
+            const AudioMeta = await AudioMetaData(await getBuffer(thumbnail), await toAudio(ress), title, data);
+            return await m.sock.sendMessage(m.jid, {
                 audio: AudioMeta,
                 mimetype: 'audio/mpeg'
             });

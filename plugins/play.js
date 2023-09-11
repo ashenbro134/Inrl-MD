@@ -31,7 +31,7 @@ inrl({
 				viewCount,
 				thumbnail
 			} = await getYTInfo(result[0]);
-			return await m.sendReply(thumbnail.url, {
+			return await m.sendReply(thumbnail, {
 				caption: GenListMessage(title, ["• video", "• audio", "• audio document"], false, "\n_Send number as reply to download_")
 			}, "image");
 		} else {
@@ -41,7 +41,7 @@ inrl({
 				viewCount,
 				thumbnail
 			} = await getYTInfo(url[0]);
-			return await m.sendReply(thumbnail.url, {
+			return await m.sendReply(thumbnail, {
 				caption: GenListMessage(title, ["• video", "• audio", "• audio document"], false, "\n_Send number as reply to download_")
 			}, "image");
 		}
@@ -60,11 +60,13 @@ inrl({
 			await m.send(lang.BASE.DOWNLOAD.format(match));
 			const result = await searchYT(match.replace('•', ''), true);
 			const {
+				seconds,
 				title,
 				thumbnail
 			} = await getYTInfo(result[0]);
-			const ress = await downloadMp3(result[0]);
-			const AudioMeta = await AudioMetaData(await getBuffer(thumbnail.url), await toAudio(ress), title, data);
+		        let qu = seconds<1800?"360p":"144p";
+			const ress = await downloadMp3(result[0],qu);
+			const AudioMeta = await AudioMetaData(await getBuffer(thumbnail), await toAudio(ress), title, data);
 			return await m.conn.sendMessage(m.from, {
 				document: AudioMeta,
 				mimetype: 'audio/mpeg',
@@ -77,10 +79,12 @@ inrl({
 			await m.send(lang.BASE.DOWNLOAD.format(match));
 			const result = await searchYT(match.replace('•', ''), true);
 			const {
+				seconds,
 				title,
 				thumbnail
 			} = await getYTInfo(result[0]);
-			const ress = await downloadMp3(result[0]);
+		        let qu = seconds<1800?"360p":"144p";
+			const ress = await downloadMp3(result[0],qu);
 			const AudioMeta = await AudioMetaData(await getBuffer(thumbnail.url), await toAudio(ress), title, data);
 			return await m.conn.sendMessage(m.jid, {
 				audio: AudioMeta,
@@ -94,10 +98,12 @@ inrl({
 			await m.send(`*_downloading_*\n*_${match}_*`);
 			const result = await searchYT(match.replace('•', ''), true);
 			const {
+				seconds,
 				title,
 				thumbnail
 			} = await getYTInfo(result[0]);
-			const ress = await downloadMp4(result[0]);
+		        let qu = seconds<1800?"360p":"144p";
+			const ress = await downloadMp4(result[0], qu);
 			return await m.conn.sendMessage(m.from, {
 				video: ress,
 				mimetype: 'video/mp4',

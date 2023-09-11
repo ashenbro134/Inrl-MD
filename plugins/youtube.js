@@ -7,7 +7,8 @@ const {
     downloadMp3,
     downloadMp4,
     GenListMessage,
-    getLang
+    getLang,
+    getYTInfo
 } = require('../lib');
 let lang = getLang();
 
@@ -31,7 +32,9 @@ inrl({
                 arr = [];
             return await m.send(GenListMessage(msg, result));
         } else {
-            const ress = await downloadMp3(url[0]);
+            const {seconds} = await getYTInfo(url[0]);
+            let quality = seconds<1800?"360p":"144p";
+            const ress = await downloadMp3(url[0],quality);
             return await m.sock.sendMessage(m.from, {
                 audio: ress,
                 mimetype: 'audio/mpeg'
@@ -56,7 +59,9 @@ inrl({
             let msg = lang.YT.INFO_VIDEO;
             return await m.send(GenListMessage(msg, result));
         } else {
-            const ress = await downloadMp4(url[0]);
+            const {seconds} = await getYTInfo(url[0]);
+            let quality = seconds<1800?"360p":"144p";
+            const ress = await downloadMp4(url[0],quality);
             await m.sock.sendMessage(m.from, {
                 video: ress,
                 mimetype: 'video/mp4'
@@ -76,7 +81,9 @@ inrl({
             match = m.client.body.replace(lang.YT.INFO_VIDEO, "").trim();
             await m.send(lang.BASE.DOWNLOAD.format(match));
             const result = await searchYT(match, true);
-            const ress = await downloadMp4(result[0]);
+            const {seconds} = await getYTInfo(result[0]);
+            let quality = seconds<1800?"360p":"144p";
+            const ress = await downloadMp4(result[0],quality);
             return await m.sock.sendMessage(m.from, {
                 video: ress,
                 mimetype: 'video/mp4'
@@ -85,7 +92,9 @@ inrl({
             match = m.client.body.replace(lang.YT.INFO_SONG, "").trim();
             await m.send(lang.BASE.DOWNLOAD.format(match));
             const result = await searchYT(match, true);
-            const ress = await downloadMp3(result[0]);
+            const {seconds} = await getYTInfo(result[0]);
+            let quality = seconds<1800?"360p":"144p";
+            const ress = await downloadMp3(result[0],quality);
             return await m.sock.sendMessage(m.from, {
                 audio: ress,
                 mimetype: 'audio/mpeg'

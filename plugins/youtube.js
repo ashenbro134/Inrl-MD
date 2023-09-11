@@ -10,7 +10,8 @@ const {
     getLang,
     getYTInfo,
     getBuffer,
-    AudioMetaData
+    AudioMetaData,
+    toAudio
 } = require('../lib');
 let lang = getLang();
 

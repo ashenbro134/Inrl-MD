@@ -8,7 +8,9 @@ const {
     downloadMp4,
     GenListMessage,
     getLang,
-    getYTInfo
+    getYTInfo,
+    getBuffer,
+    AudioMetaData
 } = require('../lib');
 let lang = getLang();
 
@@ -20,7 +22,7 @@ inrl({
     pattern: 'song',
     type: "downloader",
     desc: lang.YT.SONG_DESC
-}, async (m,match) => {
+}, async (m,match, data) => {
     try {
         match = match|| m.reply_message.text;
         if (!match) return await m.send(lang.BASE.NEED);
@@ -32,11 +34,12 @@ inrl({
                 arr = [];
             return await m.send(GenListMessage(msg, result));
         } else {
-            const {seconds} = await getYTInfo(url[0]);
+            const {seconds,title,thumbnail} = await getYTInfo(url[0]);
             let quality = seconds<1800?"360p":"144p";
             const ress = await downloadMp3(url[0],quality);
+            const AudioMeta = await AudioMetaData(await getBuffer(thumbnail), await toAudio(ress), title, data);
             return await m.sock.sendMessage(m.from, {
-                audio: ress,
+                audio: AudioMeta,
                 mimetype: 'audio/mpeg'
             });
         }
@@ -74,7 +77,7 @@ inrl({
 });
 inrl({
     on: "text"
-}, async (m, match) => {
+}, async (m, match, data) => {
     if (!m.quoted.fromMe) return;
     try {
         if (m.client.body.includes(lang.YT.INFO_VIDEO)) {
@@ -92,11 +95,12 @@ inrl({
             match = m.client.body.replace(lang.YT.INFO_SONG, "").trim();
             await m.send(lang.BASE.DOWNLOAD.format(match));
             const result = await searchYT(match, true);
-            const {seconds} = await getYTInfo(result[0]);
+            const {seconds,title,thumbnail} = await getYTInfo(result[0]);
             let quality = seconds<1800?"360p":"144p";
+            const AudioMeta = await AudioMetaData(await getBuffer(thumbnail), await toAudio(ress), title, data);
             const ress = await downloadMp3(result[0],quality);
             return await m.sock.sendMessage(m.from, {
-                audio: ress,
+                audio: AudioMeta,
                 mimetype: 'audio/mpeg'
             });
         }

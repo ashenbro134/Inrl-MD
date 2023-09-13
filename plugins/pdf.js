@@ -1,3 +1,6 @@
+/*
+
+"pdfkit": "^0.13.0",
 const {
         inrl
 } = require('../lib'),
@@ -58,3 +61,4 @@ inrl({
                 }
         } else return await message.send('_Reply to any image, get helps by using ".pdf help" command_')
 });
+*/

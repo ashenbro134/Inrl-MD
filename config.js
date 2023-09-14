@@ -42,8 +42,8 @@ module.exports = {
     EXIT_MSG : process.env.EXIT_MSG || "$text>_goodbye _ *&user*;$image>&pp;",
     LANG : process.env.LANG || "en",
     BLOCK_CHAT : process.env.BLOCK_CHAT || "jid@g.us, jid2@g.us",//set chat similarly
-    BOT_PRESENCE : process.env.BOT_PRESENCE || "recording",
-    AUDIO_DATA : process.env.AUDIO_DATA || "ᴍᴜꜱɪᴄ;ᴋɪᴅ;https://i.imgur.com/DyLAuEh.jpg",
-    STICKER_DATA : process.env.STICKER_DATA || "inrl;inrl",
+    BOT_PRESENCE : process.env.BOT_PRESENCE || "composing",
+    AUDIO_DATA : process.env.AUDIO_DATA || "𝛪𝛮𝑅𝐿;𝛪𝛮𝑅𝐿-𝐵𝛩𝑇-𝛭𝐷;https://i.imgur.com/DyLAuEh.jpg",
+    STICKER_DATA : process.env.STICKER_DATA || "𝛪𝛮𝑅𝐿;𝛪𝛮𝑅𝐿-𝐵𝛩𝑇-𝛭𝐷",
     SUDO : process.env.SUDO || "917090806050"
 };

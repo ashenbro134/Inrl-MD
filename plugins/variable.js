@@ -244,7 +244,7 @@ inrl({
     fromMe: true
 }, async (message, match, {BLOCK_CHAT}) => {
     let jid = message.reply_message.sender || message.client.mention.jid[0];
-    if(!jid) return await message.send(lang.BASE.NEED.format('user or mention someone');
+    if(!jid) return await message.send(lang.BASE.NEED.format('user or mention someone'));
     if(!BLOCK_CHAT.includes(jid)) return await message.send("*_user already in the banned list_*");
     BLOCK_CHAT = BLOCK_CHAT+jid;
     await UpdateVariable("BLOCK_CHAT", BLOCK_CHAT, message.client.user.number);
@@ -259,7 +259,7 @@ inrl({
     fromMe: true
 }, async (message, match, {BLOCK_CHAT}) => {
     let jid = message.reply_message.sender || message.client.mention.jid[0];
-    if(!jid) return await message.send(lang.BASE.NEED.format('user or mention someone');
+    if(!jid) return await message.send(lang.BASE.NEED.format('user or mention someone'));
     if(!BLOCK_CHAT.includes(jid)) return await message.send("*_user not exist in the banned list_*")
     BLOCK_CHAT = BLOCK_CHAT.replace(jid,"")
     await UpdateVariable("BLOCK_CHAT", BLOCK_CHAT, message.client.user.number);

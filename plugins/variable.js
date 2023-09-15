@@ -206,9 +206,12 @@ inrl({
     type: "settings",
     fromMe: true
 }, async (message, match, data) => {
-    if (!match) return await message.send(lang.VARS.LANG.METHODE.format("lang get","lang ml"));
+    if (!match) return await message.send(lang.VARS.LANG.METHODE.format("lang list\nlang get","lang ml"));
     if (match && match == "get") {
         return await message.send(data.LANG);
+    } else if (match == "list"){
+       let list = `*_list of languages*_\n\n1 _en_\n2 _ml_\n3 _id_\n4 _zu_\n5 _hi_\n6 _si_`;
+        return await message.send(list);
     } else if (match) {
         await UpdateVariable("LANG", match, message.client.user.number);
         return await message.send(lang.BASE.SUCCESS);
@@ -221,7 +224,7 @@ inrl({
     type: "settings",
     fromMe: true
 }, async (message, match, {BLOCK_CHAT}) => {
-    let jid = message.jid || message.reply_message.sender
+    let jid = message.jid;
 if(BLOCK_CHAT.includes(jid)){
     BLOCK_CHAT = BLOCK_CHAT.replace(jid,"")
     await UpdateVariable("BLOCK_CHAT", BLOCK_CHAT, message.client.user.number);
@@ -231,6 +234,36 @@ if(BLOCK_CHAT.includes(jid)){
     await UpdateVariable("BLOCK_CHAT", BLOCK_CHAT, message.client.user.number);
     return await message.send(lang.BASE.SUCCESS);
 }
+});
+
+inrl({
+    pattern: 'ban$',
+    desc: lang.VARS.ANTIBOT.DESC,
+    react: "🥸",
+    type: "settings",
+    fromMe: true
+}, async (message, match, {BLOCK_CHAT}) => {
+    let jid = message.reply_message.sender || message.client.mention.jid[0];
+    if(!jid) return await message.send(lang.BASE.NEED.format('user or mention someone');
+    if(!BLOCK_CHAT.includes(jid)) return await message.send("*_user already in the banned list_*");
+    BLOCK_CHAT = BLOCK_CHAT+jid;
+    await UpdateVariable("BLOCK_CHAT", BLOCK_CHAT, message.client.user.number);
+    return await message.send(lang.BASE.SUCCESS);
+});
+
+inrl({
+    pattern: 'unban$',
+    desc: lang.VARS.ANTIBOT.DESC,
+    react: "🥸",
+    type: "settings",
+    fromMe: true
+}, async (message, match, {BLOCK_CHAT}) => {
+    let jid = message.reply_message.sender || message.client.mention.jid[0];
+    if(!jid) return await message.send(lang.BASE.NEED.format('user or mention someone');
+    if(!BLOCK_CHAT.includes(jid)) return await message.send("*_user not exist in the banned list_*")
+    BLOCK_CHAT = BLOCK_CHAT.replace(jid,"")
+    await UpdateVariable("BLOCK_CHAT", BLOCK_CHAT, message.client.user.number);
+    return await message.send(lang.BASE.SUCCESS);
 });
 
 inrl({

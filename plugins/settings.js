@@ -7,7 +7,7 @@ const {
 let lang = getLang()
 
 inrl({
-    pattern: 'setting$',
+    pattern: '^setting',
     fromMe: true,
     DismissPrefix: true,
     type: "system",
@@ -35,8 +35,6 @@ inrl({
                 lang.SETTINGS.PRESENCE,
                 lang.SETTINGS.SUDO_ADMIN,
                 lang.SETTINGS.REJECT_CALL,
-                lang.SETTINGS.SPAM_WARN,
-                lang.SETTINGS.BAD_WORD_WARN,
                 lang.SETTINGS.BAD_WORD_BLOCK,
                 lang.SETTINGS.SPAM_BLOCK
             ], false,lang.SETTINGS.TO_UPDATE)
@@ -203,20 +201,6 @@ inrl({
         return await m.sock.sendMessage(m.from, {
             text: GenListMessage(`status : ${REJECT_CALL}`, [`REJECTCALL ${REJECT_CALL == "true"? ': DEACTIVATE ':': ACTIVATE'}`])
         })
-    } else if (match == lang.SETTINGS.SPAM_WARN.toLowerCase()) {
-        const {
-            WARN_GROUP_SPAMMERS
-        } = data;
-        return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${WARN_GROUP_SPAMMERS}`, [`WARN GROUP SPAMMERS ${WARN_GROUP_SPAMMERS == "true"? ': DEACTIVATE ':': ACTIVATE'}`])
-        })
-    } else if (match == lang.SETTINGS.BAD_WORD_WARN.toLowerCase()) {
-        const {
-            BAD_WORD_WARN
-        } = data;
-        return await m.sock.sendMessage(m.from, {
-            text: GenListMessage(`status : ${BAD_WORD_WARN}`, [`WARN INAPPROPRIATE MESSAGE SENDER ${BAD_WORD_WARN == "true"? ': DEACTIVATE ':': ACTIVATE'}`])
-        })
     } else if (match == lang.SETTINGS.BAD_WORD_BLOCK.toLowerCase()) {
         const {
             BADWORD_BLOCK
@@ -319,16 +303,6 @@ inrl({
         let updt = match.split(" ").pop();
         updt = updt == "true" ? 'false' : 'true';
         await UpdateVariable("REJECT_CALL", updt, m.client.user.number);
-        return await m.reply(lang.BASE.SUCCESS);
-    } else if (match.includes('warn group spammers')) {
-        let updt = match.split(" ").pop();
-        updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("WARN_GROUP_SPAMMERS", updt, m.client.user.number);
-        return await m.reply(lang.BASE.SUCCESS);
-    } else if (match.includes('warn inappropriate message sender')) {
-        let updt = match.split(" ").pop();
-        updt = updt == "true" ? 'false' : 'true';
-        await UpdateVariable("BADWORD_BLOCK", updt, m.client.user.number);
         return await m.reply(lang.BASE.SUCCESS);
     } else if (match.includes('avoid inappropriate message sender')) {
         let updt = match.split(" ").pop();

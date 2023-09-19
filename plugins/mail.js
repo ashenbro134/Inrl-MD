@@ -18,13 +18,13 @@ inrl({
                 if (data.status && data.result && data.result.length > 0) {
                         const tempMails = data.result.join('\n');
                         const replyMessage = `*Temporary Email Addresses:*\n\n${tempMails}\n\n use \`\`\`\checkmail <mail-address>\`\`\`\ if you want to check inbox of any temp mail used from above`;
-                        return await m.reply(replyMessage);
+                        return await message.send(replyMessage);
                 } else {
-                        return await m.reply('No temporary email addresses found.');
+                        return await message.send('No temporary email addresses found.');
                 }
         } catch (error) {
                 console.error('Error:', error);
-                return await m.reply('Failed to fetch temporary email addresses.');
+                return await message.send('Failed to fetch temporary email addresses.');
         }
 });
 inrl({
@@ -34,7 +34,7 @@ inrl({
         type: "utility"
 }, async (message, match) => {
         match = match || message.reply_message.text;
-        if (!match) return await m.reply('Please provide some text or quote a message to get a response.');
+        if (!match) return await message.send('Please provide some text or quote a message to get a response.');
         const mail = match.match(/[^< ]+(?=>)/g);
         if (!mail[0]) return await message.send("_give me an mail id!_");
         try {
@@ -52,12 +52,12 @@ ${message.text}
           `;
                         }).join('\n\n---\n\n');
                         const replyMessage = `*Messages in* ${mail[0]}:\n\n${messages}`;
-                        return await m.reply(replyMessage);
+                        return await message.send(replyMessage);
                 } else {
-                        return await m.reply(`No messages found in ${mail[0]}.`);
+                        return await message.send(`No messages found in ${mail[0]}.`);
                 }
         } catch (error) {
                 console.error('Error:', error);
-                return await m.reply(`Failed to check messages in ${mail[0]}.`);
+                return await message.send(`Failed to check messages in ${mail[0]}.`);
         }
 });

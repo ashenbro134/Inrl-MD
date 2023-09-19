@@ -6,7 +6,7 @@ const {
         BASE_URL
 } = require('../config');
 inrl({
-        pattern: 'tempmail',
+        pattern: '$tempmail',
         desc: 'get temporary mail for 10 minutes',
         react: "🙃",
         type: "utility"
@@ -28,7 +28,7 @@ inrl({
         }
 });
 inrl({
-        pattern: 'checkmail',
+        pattern: '$checkmail',
         desc: 'get temporary mail messages',
         react: "🙃",
         type: "utility"

@@ -36,7 +36,7 @@ inrl({
         match = match || message.reply_message.text;
         if (!match) return await m.reply('Please provide some text or quote a message to get a response.');
         const mail = match.match(/[^< ]+(?=>)/g);
-        if (!mail[0]) return await message.send("_givee an mail id!_");
+        if (!mail[0]) return await message.send("_give me an mail id!_");
         try {
                 const {
                         data

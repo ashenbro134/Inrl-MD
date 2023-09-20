@@ -49,6 +49,7 @@ inrl({
                 } else if (message.reply_message.image) {
                         const media = await message.quoted.download();
                         fs.writeFileSync('./media/pdf/' + getRandom('.jpg'), media);
+                        doc.end();
                         return await message.send("*Image added!*");
                 } else if (match && match == "get") {
                         let page = 1;
@@ -82,6 +83,6 @@ inrl({
                         });
                 }
         } catch (e) {
-                return await message.send(e);
+                return await message.send('_Reply to any image/text!_');
         }
 });

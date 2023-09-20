@@ -58,8 +58,7 @@ inrl({
 })
 
 inrl({
-    pattern: 'iswa ?(.*)',
-    fromMe: true,
+    pattern: '$iswa ?(.*)',
     desc: lang.WHATSAPP.ISWA.ISWA_DISC,
     type: 'search',
 }, async (m, match) => {
@@ -114,8 +113,7 @@ inrl({
 
 
 inrl({
-    pattern: 'nowa ?(.*)',
-    fromMe: true,
+    pattern: '$nowa ?(.*)',
     desc: lang.WHATSAPP.NOWA.DESC,
     type: 'search',
 }, async (m, match) => {

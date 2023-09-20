@@ -1,64 +1,88 @@
-/*
-
-"pdfkit": "^0.13.0",
+const PDFDocument = require('pdfkit');
+const fs = require('fs');
+const path = './media/pdf';
 const {
-        inrl
-} = require('../lib'),
-        imgToPDF = require('image-to-pdf'),
-        fs = require('fs'), {
-                fromBuffer
-        } = require('file-type'),
-        Fs = require("node:fs/promises"),
-        pdfPath = './media/pdf',
-        res = './media/converted.pdf',
-        path = require('path');
+        inrl,
+        stream2buffer,
+        getRandom
+} = require('../lib');
 inrl({
         pattern: 'pdf ?(.*)',
-        desc: "Images to PDF",
+        desc: "Images/texts to PDF",
         type: 'converters',
-        usage: `_1. Input images using .pdf_\n_2. Get output pdf using .pdf get_\n_3. Added images by mistake? then delete all inputted images using .pdf delete_\n_4. All files will be auto deleted after the output is produced_`
+        usage: `_1. Input images/text using .pdf_\n_2. Get output pdf using .pdf get_\n_3. Added images by mistake? then delete all inputted images using .pdf delete_\n_4. All files will be auto deleted after the output is produced_`
 }, async (message, match) => {
-        if (!fs.existsSync(pdfPath)) {
-                fs.mkdirSync(pdfPath)
-        }
-        if (match?.toLowerCase() == 'delete') {
-                for (const file of await Fs.readdir(pdfPath)) {
-                        await Fs.unlink(path.join(pdfPath, file));
+        try {
+                match = match || message.reply_message.text;
+                if (!match && !message.reply_message.image) return await message.send("*reply to an image or text*\nuse pdf _help_ to clarify");
+                if (!fs.existsSync(path)) {
+                        fs.mkdirSync(path)
                 }
-                try {
-                        await Fs.unlink(res)
-                } catch {}
-                await message.send(`_Successfully cleared all files!_`)
-        } else if (match?.toLowerCase() == 'get') {
-                const pages = (await fs.readdirSync(pdfPath)).filter(e => e.includes('topdf')).map(e => pdfPath + '/' + e)
-                if (!pages.length) return await message.send('_No files inputted_')
-                imgToPDF(pages, imgToPDF.sizes.A4).pipe(fs.createWriteStream(res)).on('finish', async () => {
-                        await message.client.sendMessage(message.jid, {
-                                document: {
-                                        url: res
-                                },
-                                mimetype: 'application/pdf',
-                                fileName: 'converted.pdf'
-                        }, {
-                                quoted: message
-                        })
-                        for (const file of await Fs.readdir(pdfPath)) {
-                                await Fs.unlink(path.join(pdfPath, file));
+                const margin = 36;
+                const doc = new PDFDocument({
+                        size: [595.28, 841.89],
+                        margin: margin
+                });
+                if (match && match != "get" && !message.reply_message.image) {
+                        let currentPage = 1;
+                        doc.on('pageAdded', () => {
+                                currentPage++;
+                        });
+                        const lines = doc.font('Helvetica', 12).text(match, margin, margin, {
+                                align: 'justify'
+                        });
+                        let y = margin;
+                        if (doc.undocumented_lines) {
+                                y += doc.undocumented_lines.length * 12;
                         }
-                        await Fs.unlink(res)
-                })
-        } else if (message.reply_message.msg) {
-                let savedFile = await message.reply_message.download()
-                let {
-                        mime
-                } = await fromBuffer(savedFile)
-                if (mime.includes('image')) {
-                        const pages = (await fs.readdirSync(pdfPath)).filter(e => e.includes('topdf'))
-                        await fs.writeFileSync(pdfPath + '/topdf_' + pages.length + '.jpg', savedFile)
-                        return await message.send(`*_Successfully saved image_*\n_*Total saved images: ${pages.length+1}*_\n*_After saving all images, use '.pdf get' to get the result. Images will be deleted after conversion!_*`)
-                } else {
-                        return await message.send('_Reply to any image!_')
+                        while (y > doc.page.height - margin) {
+                                doc.addPage();
+                                currentPage++;
+                                y -= doc.page.height - margin;
+                        }
+                        doc.end();
+                        const pdfBuffer = await stream2buffer(doc);
+                        return await message.sock.sendMessage(message.jid, {
+                                'document': pdfBuffer,
+                                filename: 'document.pdf'
+                        });
+                } else if (message.reply_message.image) {
+                        const media = await message.quoted.download();
+                        fs.writeFileSync('./media/pdf/' + getRandom('.jpg'), media);
+                        return await message.send("*Image added!*");
+                } else if (match && match == "get") {
+                        let page = 1;
+                        const files = fs.readdirSync('./media/pdf');
+                        if (files.length == 0) return await message.send('*No image/message added*');
+                        files.map(async (file) => {
+                                if (file != "pdf" && page == 1) {
+                                        doc.image(fs.readFileSync('./media/pdf/' + file), {
+                                                fit: [500, 500],
+                                                align: 'center',
+                                                valign: 'center'
+                                        });
+                                        page++
+                                } else if (file != "pdf" && page != 1) {
+                                        doc.addPage().image(fs.readFileSync('./media/pdf/' + file), {
+                                                fit: [500, 500],
+                                                align: 'center',
+                                                valign: 'center'
+                                        });
+                                }
+                                await message.send(page);
+                        });
+                        doc.end();
+                        const pdfBuffer = await stream2buffer(doc);
+                        await message.sock.sendMessage(message.jid, {
+                                document: pdfBuffer,
+                                fileName: "md.pdf"
+                        });
+                        fs.rmSync(path, {
+                                recursive: true,
+                                force: true
+                        });
                 }
-        } else return await message.send('_Reply to any image, get helps by using ".pdf help" command_')
+        } catch (e) {
+                return await message.send(e);
+        }
 });
-*/

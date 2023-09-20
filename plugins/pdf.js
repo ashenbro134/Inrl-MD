@@ -11,7 +11,7 @@ inrl({
         desc: "Images/texts to PDF",
         type: 'converters',
         usage: `_1. Input images/text using .pdf_\n_2. Get output pdf using .pdf get_\n_3. Added images by mistake? then delete all inputted images using .pdf delete_\n_4. All files will be auto deleted after the output is produced_`
-}, async (message, match) => {
+}, async (message, match, {BOT_INFO}) => {
         try {
                 match = match || message.reply_message.text;
                 if (!match && !message.reply_message.image) return await message.send("*reply to an image or text*\nuse pdf _help_ to clarify");
@@ -68,14 +68,13 @@ inrl({
                                                 align: 'center',
                                                 valign: 'center'
                                         });
-                                }
-                                await message.send(page);
+                                 }
                         });
                         doc.end();
                         const pdfBuffer = await stream2buffer(doc);
                         await message.sock.sendMessage(message.jid, {
                                 document: pdfBuffer,
-                                fileName: "md.pdf"
+                                fileName: "images.pdf"
                         });
                         fs.rmSync(path, {
                                 recursive: true,

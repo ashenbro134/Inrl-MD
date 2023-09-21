@@ -3,7 +3,8 @@ const {
     commands,
     send_alive,
     send_menu,
-    getLang
+    getLang,
+    UpdateVariable
 } = require('../lib')
 const Config = require("../config");
 let lang = getLang()
@@ -36,14 +37,14 @@ inrl({
     if(match == "get" && message.client.isCreator){
     return await message.send(data.ALIVE_DATA);
     } else if(match && message.client.isCreator){
-    await  UpdateVariable("ALIVE_DATA", match.trim(),message.conn.user.id.split(':')[0]);
+    await UpdateVariable("ALIVE_DATA", match.trim(), message.conn.user.number);
     return await message.send('*success*');
     }
     return await send_alive(message, data);
 });
 
 inrl({
-    pattern: lang.CMDS.DESC,
+    pattern: cmd,
     react: "🆗",
     type: 'info'
 }, async (message, match) => {

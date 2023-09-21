@@ -1,4 +1,3 @@
->
 const {
         inrl,
         imageEdit

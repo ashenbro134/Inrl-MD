@@ -77,7 +77,7 @@ inrl({
             if(!img) return await message.send(lang.GENERAL.IMG_NEED.format("adata get","adata name;name;url"));
             img = img.trim()
             let imgForaUdio = await getBuffer(img);
-            const AudioMeta = await AudioMetaData(imgForaUdio, await(toAudio(await message.quoted.download()), text, data);
+            const AudioMeta = await AudioMetaData(imgForaUdio, await toAudio(await message.quoted.download()), text, data);
             return await message.conn.sendMessage(message.jid, {
                 audio: AudioMeta,
                 mimetype: 'audio/mpeg',

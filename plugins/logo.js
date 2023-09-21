@@ -43,16 +43,6 @@ inrl({
         return await message.sendReply(url, {}, "image");
 });
 inrl({
-        pattern: 'dragon ?(.*)',
-        desc: "generate images with command theme",
-        type: 'logo'
-}, async (message, match, data, cmd) => {
-        if (!match) return await message.send(`*_give me a text to add over image_*\n*${cmd}* _hi|its me inrl_`);
-        const url = await imageEdit('dragon', match);
-        if (!url) return await message.send("_Error while generating image!_");
-        return await message.sendReply(url, {}, "image");
-});
-inrl({
         pattern: 'marvel ?(.*)',
         desc: "generate images with command theme",
         type: 'logo'

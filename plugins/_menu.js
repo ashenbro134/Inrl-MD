@@ -44,7 +44,7 @@ inrl({
 });
 
 inrl({
-    pattern: cmd,
+    pattern: "cmd",
     react: "🆗",
     type: 'info'
 }, async (message, match) => {

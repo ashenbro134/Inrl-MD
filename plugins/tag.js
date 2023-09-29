@@ -5,7 +5,7 @@ const {
 let lang = getLang()
 
 inrl({
-    pattern: '$tag',
+    pattern: 'tag',
     desc: lang.TAG_DESC,
     type: "owner",
     onlyGroup :true

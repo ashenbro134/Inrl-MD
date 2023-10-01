@@ -32,7 +32,7 @@ inrl({
 				thumbnail
 			} = await getYTInfo(result[0]);
 			return await m.sendReply(thumbnail, {
-				caption: GenListMessage(title, ["• video", "• audio", "• audio document"], false, "\n_Send number as reply to download_")
+				caption: GenListMessage(title, ["• video", "• video document", "• audio", "• audio document"], false, "\n_Send number as reply to download_")
 			}, "image");
 		} else {
 			const {
@@ -42,7 +42,7 @@ inrl({
 				thumbnail
 			} = await getYTInfo(url[0]);
 			return await m.sendReply(thumbnail, {
-				caption: GenListMessage(title, ["• video", "• audio", "• audio document"], false, "\n_Send number as reply to download_")
+				caption: GenListMessage(title, ["• video", "• video document", "• audio", "• audio document"], false, "\n_Send number as reply to download_")
 			}, "image");
 		}
 	} catch (e) {
@@ -90,6 +90,24 @@ inrl({
 				audio: AudioMeta,
 				mimetype: 'audio/mpeg',
 				fileName: title.replaceAll(' ', '-') + ".mp3"
+			}, {
+				quoted: m
+			});
+		} else if (m.client.body.includes("• video document")) {
+			match = m.client.body.replace("• video document", "").trim();
+			await m.send(lang.BASE.DOWNLOAD.format(match));
+			const result = await searchYT(match.replace('•', ''), true);
+			const {
+				seconds,
+				title,
+				thumbnail
+			} = await getYTInfo(result[0]);
+		        let qu = seconds<1800?"360p":"144p";
+			const ress = await downloadMp4(result[0],qu);
+			return await m.conn.sendMessage(m.from, {
+				document: ress,
+				mimetype:  'video/mp4',
+				fileName: title.replaceAll(' ', '-') + ".mp4"
 			}, {
 				quoted: m
 			});

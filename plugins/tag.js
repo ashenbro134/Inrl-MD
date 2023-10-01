@@ -5,10 +5,11 @@ const {
 let lang = getLang()
 
 inrl({
-    pattern: 'tag',
+    pattern: 'tag ?(.*)',
     desc: lang.TAG_DESC,
     type: "owner",
-    onlyGroup :true
+    onlyGroup :true,
+    fromMe: true
 }, async (message, match) => {
     if(!match && !message.quoted.text) return;
     const groupMetadata = await message.client.groupMetadata(message.from).catch(e => {})

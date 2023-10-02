@@ -6,7 +6,7 @@ const {
 let lang = getLang()
 
 inrl({
-    pattern: 'getvar$',
+    pattern: 'getvar ?(.*)',
     desc: lang.VARS.GET_DESC,
     sucReact: "😑",
     category: ["all,system"],
@@ -134,7 +134,7 @@ SUDO: ${SUDO}`
     } else return await message.reply(lang.VARS.ERROR.format(".getvar"));
 })
 inrl({
-    pattern: 'prefix$',
+    pattern: 'prefix ?(.*)',
     desc: lang.VARS.PREFIX.DESC,
     react: "🧤",
     type: "settings",
@@ -150,7 +150,7 @@ inrl({
     }
 });
 inrl({
-    pattern: 'adata$',
+    pattern: 'adata ?(.*)',
     desc: lang.VARS.A_DATA.DESC,
     react: "⛑️",
     type: "settings",
@@ -167,7 +167,7 @@ inrl({
     }
 });
 inrl({
-    pattern: 'sdata$',
+    pattern: 'sdata ?(.*)',
     desc: lang.VARS.S_DATA.DESC,
     react: "⛑️",
     type: "settings",
@@ -185,7 +185,7 @@ inrl({
 });
 
 inrl({
-    pattern: 'bio$',
+    pattern: 'bio ?(.*)',
     desc: lang.VARS.BIO.DESC,
     react: "🤪",
     type: "settings",
@@ -200,7 +200,7 @@ inrl({
     }
 });
 inrl({
-    pattern: 'lang$',
+    pattern: 'lang ?(.*)',
     desc: lang.VARS.LANG.DESC,
     react: "🤪",
     type: "settings",
@@ -210,7 +210,7 @@ inrl({
     if (match && match == "get") {
         return await message.send(data.LANG);
     } else if (match == "list"){
-       let list = `*_list of languages*_\n\n1 _en_\n2 _ml_\n3 _id_\n4 _zu_\n5 _hi_\n6 _si_`;
+       let list = `*_list of languages_*\n\n1 _en_\n2 _ml_\n3 _id_\n4 _zu_\n5 _hi_\n6 _si_`;
         return await message.send(list);
     } else if (match) {
         await UpdateVariable("LANG", match, message.client.user.number);
@@ -218,7 +218,7 @@ inrl({
     }
 });
 inrl({
-    pattern: 'antibot$',
+    pattern: 'antibot ?(.*)',
     desc: lang.VARS.ANTIBOT.DESC,
     react: "🥸",
     type: "settings",
@@ -237,7 +237,7 @@ if(BLOCK_CHAT.includes(jid)){
 });
 
 inrl({
-    pattern: 'ban$',
+    pattern: 'ban ?(.*)',
     desc: lang.VARS.ANTIBOT.DESC,
     react: "🥸",
     type: "settings",
@@ -252,7 +252,7 @@ inrl({
 });
 
 inrl({
-    pattern: 'unban$',
+    pattern: 'unban ?(.*)',
     desc: lang.VARS.ANTIBOT.DESC,
     react: "🥸",
     type: "settings",
@@ -267,7 +267,7 @@ inrl({
 });
 
 inrl({
-    pattern: 'binfo$',
+    pattern: 'binfo ?(.*)',
     desc: lang.VARS.B_INFO.DESC,
     react: "✳️",
     type: "settings",
@@ -278,24 +278,20 @@ inrl({
         return await message.send(data.BOT_INFO);
     } else if (match) {
         if (!match.match(/[;|,]/)) return await message.send(lang.VARS.B_INFO.METHODE.format("binfo get","binfo"));
-        if (match.split(/[;|,]/).length != 4) return await message.send(lang.VARS.B_INFO.METHODE.format("binfo get","binfo"));
+        if (match.split(/[;|,]/).length != 3) return await message.send(lang.VARS.B_INFO.METHODE.format("binfo get","binfo"));
         await UpdateVariable("BOT_INFO", match, message.client.user.number);
         return await message.send(lang.BASE.SUCCESS);
     }
 });
 inrl({
-    pattern: 'sudo$',
+    pattern: 'sudo ?(.*)',
     desc: lang.VARS.SUDO.DESC,
     react: "🤯",
     type: "settings",
     fromMe: true
 }, async (message, match, data) => {
-    let sudo;
-    if (message.quoted.sender) {
-        sudo = message.quoted.number
-    } else if (match && match.replace(/[^0-9]/g, '')) {
-        sudo = match.replace(/[^0-9]/g, '')
-    }
+    let sudo = (message.quoted.number || message.client.mention.jid.join(',') || match).replace(/[^0-9]/g, '');
+    if(!sudo) return await message.send("*Example*\n*sudo get*\n*sudo remove*\n*sudo mention/reply/message*");
     if (match && match == "get") {
         return await message.send(`${data.SUDO?data.SUDO:'no data'}`);
     } else if (match.includes("remove")) {
@@ -305,7 +301,7 @@ inrl({
         await UpdateVariable("SUDO", value, message.client.user.number);
         return await message.send(lang.BASE.SUCCESS);
     } else if (sudo) {
-        sudo = data.SUDO + ',' + sudo;
+        sudo = (data.SUDO + ',' + sudo).replace(/[^0-9,]/g, '');
         await UpdateVariable("SUDO", sudo, message.client.user.number);
         return await message.send(lang.BASE.SUCCESS);
     } else {

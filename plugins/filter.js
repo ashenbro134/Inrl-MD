@@ -12,7 +12,7 @@ inrl({
     pattern: 'filter',
     desc: lang.FILTERS.DESC,
     react: "🌝",
-    type: 'info',
+    type: 'filter',
     onlyGroup: true,
     fromMe : true
 }, async (m) => {
@@ -26,13 +26,25 @@ inrl({
             const res = await getFilterV2(m.from, false, m.client.user.number);
             return await m.send(res);
         }
-    } else if ((text.includes("del") || text.includes("dlt")) && !text.includes('=')) {
-        if (!text.replace("dlt","").replace("del","").trim()) return m.send('*Failed*');
-        const res = removeFilter(m.from, text.replace("dlt","").replace("del","").trim(), m.client.user.number);
-        if (!res) return await m.send(lang.FILTERS.NOT_FOUND.format("*filter get*"));
-        return await m.send("successfull");
     }
     if (!text.includes('=')) return await m.reply(lang.FILTERS.INVALID.format("*filter 💗=https://example.webp/sticker*\n\n"));
     const response = await addFilterV2(m.from, text, m.client.user.number);
     return await m.reply(`${response?"_success_":"*Failed*\n"+lang.FILTERS.INVALID.format("*filter 💗=https://example.webp/sticker*\n\n")}`);
 });
+
+
+inrl({
+    pattern: 'stop',
+    desc: "remove filters fromg group",
+    react: "😫",
+    type: 'filter',
+    onlyGroup: true,
+    fromMe : true
+}, async (m, match) => {
+        if(!match) return await m.send('*Example*\n*stop* ```hi``` _to stop filter *hi*_\n*filter* ```get``` to get current filters thets you added');
+        const res = removeFilter(m.from, match, m.client.user.number);
+        if (!res) return await m.send("_*given filter not found for this group*_");
+        return await m.send("successfull");
+    });
+
+

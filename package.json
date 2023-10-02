@@ -13,6 +13,7 @@
   "dependencies": {
     "@whiskeysockets/baileys": "^6.5.0",
     "acrcloud": "1.4.0",
+    "qrcode-reader": "^1.0.4",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@vitalets/google-translate-api": "^9.2.0",
     "@adiwajshing/keyed-db": "^0.2.4",

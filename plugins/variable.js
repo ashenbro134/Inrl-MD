@@ -291,11 +291,11 @@ inrl({
     fromMe: true
 }, async (message, match, data) => {
     let sudo = (message.quoted.number || message.client.mention.jid.join(',') || match).replace(/[^0-9]/g, '');
-    if(!sudo && match!="get") return await message.send("*Example*\n*sudo get*\n*sudo remove*\n*sudo mention/reply/message*");
+    if(!sudo && match!="get" && match != "remove") return await message.send("*Example*\n*sudo get*\n*sudo remove*\n*sudo mention/reply/message*");
     if (match && match == "get") {
         return await message.send(`${data.SUDO?data.SUDO:'no data'}`);
     } else if (match.includes("remove")) {
-        const jid = message.quoted.number || match.replace("remove", "").trim().replace(/[^0-9]/g, '');
+        const jid = (message.quoted.number || message.client.mention.jid.join(',') || match).replace(/[^0-9]/g, '');
         if (!data.SUDO.includes(jid)) return message.send(lang.VARS.SUDO.NOT_EXIST);
         let value = data.SUDO.includes(',' + jid) ? data.SUDO.replaceAll(',' + jid, "") : data.SUDO.includes(jid + ',') ? data.SUDO.replaceAll(jid + ',', "") : data.SUDO.replaceAll(jid, "");
         await UpdateVariable("SUDO", value, message.client.user.number);

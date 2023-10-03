@@ -291,7 +291,7 @@ inrl({
     fromMe: true
 }, async (message, match, data) => {
     let sudo = (message.quoted.number || message.client.mention.jid.join(',') || match).replace(/[^0-9]/g, '');
-    if(!sudo) return await message.send("*Example*\n*sudo get*\n*sudo remove*\n*sudo mention/reply/message*");
+    if(!sudo && match!="get") return await message.send("*Example*\n*sudo get*\n*sudo remove*\n*sudo mention/reply/message*");
     if (match && match == "get") {
         return await message.send(`${data.SUDO?data.SUDO:'no data'}`);
     } else if (match.includes("remove")) {

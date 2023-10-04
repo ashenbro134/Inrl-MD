@@ -12,9 +12,9 @@ inrl({
     desc: lang.MEDIA_CMD.SET_DESC,
     react: "😛",
     type: "action",
-    fromMe :true
+    fromMe :true,
+    media: "sticker"//you can get this type of active action from 'eval'=>() return lib.commands[0]
 }, async (message, match) => {
-    if (!message.reply_message.sticker) return await message.reply(lang.MEDIA_CMD.NOT_A_STICKER.format("setcmd ping,reply to a media message"));
     if (!message.reply_message.msg.fileSha256) return message.send(lang.MEDIA_CMD.CMD_ERROR)
     if (!match) return await message.send(lang.MEDIA_CMD.NO_CMD)
     await setCmd(message.quoted.msg.fileSha256.join(""), match,message.client.user.number)

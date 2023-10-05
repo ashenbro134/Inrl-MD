@@ -48,10 +48,10 @@ inrl({
                                 return message.reply(lang.BASE.INVALID_URL)
                         })
                         if (status == 200) {
+                                try {
                                 plugin_name = data.match(/(?<=pattern:) ["'](.*?)["']/);
                                 plugin_name = plugin_name[0].replace(/["']/g, "").trim().split(" ")[0] + "test";
                                 fs.writeFileSync(__dirname + "/" + plugin_name + ".js", data);
-                                try {
                                         require("./" + plugin_name);
                                 } catch (e) {
                                         fs.unlinkSync(__dirname + "/" + plugin_name + ".js");
@@ -85,7 +85,7 @@ inrl({
         type: "system",
         fromMe: true
 }, async (message, match) => {
-        if (!match) return;
+        if (!match) return await message.send("*Give mea plugin name thet you want to remove*");
         match = match.trim();
         let list = await getListOfPlugin(message.client.user.number),
                 name = "",
@@ -96,9 +96,8 @@ inrl({
                 if (name == match) {
                         await dlt_plugin(match, message.client.user.number)
                         return await message.send(lang.EXTERNAL_PLUGIN.REMOVED);
-                } else {
                         avb = true;
-                }
+                } 
         }
         if (avb) return await message.reply(lang.EXTERNAL_PLUGIN.NO_PLUGIN);
 })

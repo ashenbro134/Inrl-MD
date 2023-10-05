@@ -25,7 +25,7 @@ inrl({
         exec('pm2 restart all')
 })
 inrl({
-        pattern: 'plugins ?(.*)',
+        pattern: 'plugin ?(.*)',
         desc: lang.EXTERNAL_PLUGIN.DESC,
         react: "🦥",
         type: "system",

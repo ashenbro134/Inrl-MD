@@ -85,8 +85,7 @@ inrl({
         type: "system",
         fromMe: true
 }, async (message, match) => {
-        if (!match) return await message.send("*Give mea plugin name thet you want to remove*");
-        match = match.trim();
+        if (!match) return await message.send("*Give me a plugin name thet you want to remove*");
         let list = await getListOfPlugin(message.client.user.number),
                 name = "",
                 avb = false;

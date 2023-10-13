@@ -1,6 +1,6 @@
 {
   "name": "inrl-bot-md",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "WhatsApp bot made with nodejs and baileys",
   "main": "index.js",
     "scripts": {
@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@whiskeysockets/baileys": "^6.5.0",
-    "acrcloud": "1.4.0",
     "qrcode-reader": "^1.0.4",
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@vitalets/google-translate-api": "^9.2.0",
@@ -43,7 +42,7 @@
     "node-webpmux": "^3.1.1",
     "os": "^0.1.2",
     "pm2": "^5.2.0",
-    "inrl-bot-md": "^1.6.2",
+    "inrl-bot-md": "^1.7.0",
     "mumaker": "2.0.0",
     "path": "^0.12.7",
     "performance-now": "^2.1.0",

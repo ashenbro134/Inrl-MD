@@ -38,8 +38,8 @@ module.exports = {
     BOT_INFO : process.env.BOT_INFO || "INRL-BOT-MD;INRL;https://i.imgur.com/DyLAuEh.jpg;wa_link",
     WORKTYPE : process.env.WORKTYPE || "private",
     PREFIX : process.env.PREFIX || ".",
-    WELCOME_MSG : process.env.WELCOME_MSG || "$text>_hey bro/sis_ *&user*\nthanks for join;$image>&pp;",
-    EXIT_MSG : process.env.EXIT_MSG || "$text>_goodbye _ *&user*;$image>&pp;",
+    WELCOME_MSG : process.env.WELCOME_MSG || "false",
+    EXIT_MSG : process.env.EXIT_MSG || "false",
     LANG : process.env.LANG || "en",
     BLOCK_CHAT : process.env.BLOCK_CHAT || "jid@g.us, jid2@g.us",//set chat similarly
     BOT_PRESENCE : process.env.BOT_PRESENCE || "composing",

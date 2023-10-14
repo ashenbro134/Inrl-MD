@@ -42,7 +42,7 @@
     "node-webpmux": "^3.1.1",
     "os": "^0.1.2",
     "pm2": "^5.2.0",
-    "inrl-bot-md": "^1.7.2",
+    "inrl-bot-md": "^1.7.7",
     "mumaker": "2.0.0",
     "path": "^0.12.7",
     "performance-now": "^2.1.0",

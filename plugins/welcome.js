@@ -16,7 +16,7 @@ inrl({
     await UpdateVariable("WELCOME_MSG", match, message.conn.user.number);
     return await message.send('*success*\n*_restart an try_*');
     }
-    return await message.send('_*welcome get*_\n_*welcome* thank you for joining &mention_\n*welcome false_*');
+    return await message.send('_*welcome get*_\n_*welcome* thank you for joining &mention_\n*_welcome false_*');
 });
 inrl({
     pattern: "goodbye",

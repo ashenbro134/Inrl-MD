@@ -35,7 +35,7 @@ module.exports = {
     AUTO_CHAT_GRP : toBool(process.env.AUTO_CHAT_GRP || "false"),
     WARNCOUND : process.env.WARNCOUND || 5,
     ALIVE_DATA : process.env.ALIVE_DATA || "$text>_iam alive now &sender_",
-    BOT_INFO : process.env.BOT_INFO || "INRL-BOT-MD;INRL;https://i.imgur.com/DyLAuEh.jpg;wa_link",
+    BOT_INFO : process.env.BOT_INFO || "INRL-BOT-MD;𝘈𝘚𝘏𝘌𝘕;https://telegra.ph/file/4c1ade09cbb189e8c7534.jpg;wa_link",
     WORKTYPE : process.env.WORKTYPE || "private",
     PREFIX : process.env.PREFIX || ".",
     WELCOME_MSG : process.env.WELCOME_MSG || "false",
@@ -43,7 +43,7 @@ module.exports = {
     LANG : process.env.LANG || "en",
     BLOCK_CHAT : process.env.BLOCK_CHAT || "jid@g.us, jid2@g.us",//set chat similarly
     BOT_PRESENCE : process.env.BOT_PRESENCE || "composing",
-    AUDIO_DATA : process.env.AUDIO_DATA || "𝛪𝛮𝑅𝐿;𝛪𝛮𝑅𝐿-𝐵𝛩𝑇-𝛭𝐷;https://i.imgur.com/DyLAuEh.jpg",
-    STICKER_DATA : process.env.STICKER_DATA || "𝛪𝛮𝑅𝐿;𝛪𝛮𝑅𝐿-𝐵𝛩𝑇-𝛭𝐷",
-    SUDO : process.env.SUDO || "917090806050"
+    AUDIO_DATA : process.env.AUDIO_DATA || "𝛪𝛮𝑅𝐿;𝛪𝛮𝑅𝐿-𝐵𝛩𝑇-𝛭𝐷;https://telegra.ph/file/4c1ade09cbb189e8c7534.jpg",
+    STICKER_DATA : process.env.STICKER_DATA || "𝛪𝛮𝑅𝐿;𝘈𝘚𝘏𝘌𝘕-𝐵𝛩𝑇-𝛭𝐷",
+    SUDO : process.env.SUDO || "94726962984"
 };

@@ -1,5 +1,5 @@
 FROM quay.io/inrlwabot/inrl:latest
-RUN git clone https://github.com/inrl-official/inrl-bot-md /root/inrl
+RUN git https://github.com/ashenbro134/Inrl-MD/root/ashenbro134
 WORKDIR /root/inrl/
 RUN yarn install --network-concurrency 1
 EXPOSE 8000

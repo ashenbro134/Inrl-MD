@@ -1,14 +1,14 @@
 {
   "name": "inrl-bot-md",
   "version": "4.0.3",
-  "description": "WhatsApp bot made with nodejs and baileys",
+  "description": "WhatsApp Bot by inrl wa bot base edit",
   "main": "index.js",
     "scripts": {
     "start": "pm2 start . --attach --name inrl"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/inrl-official/inrl-bot-md.git"
+    "url": "git+https://github.com/ashenbro134/Inrl-MD.git"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "^6.5.0",
